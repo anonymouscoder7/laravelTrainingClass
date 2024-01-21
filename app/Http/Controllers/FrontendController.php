@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
     function index(){
-        $data = 'Digital Pathsala';
-        return view('welcome',compact('data'));
+        $students = Student::orderBy('id','desc')->get();
+        // dd($students);
+
+        return view('welcome',compact('students'));
     }
 
 
