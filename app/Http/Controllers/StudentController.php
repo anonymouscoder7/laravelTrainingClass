@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class StudentController extends Controller
 {
@@ -12,7 +13,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -57,9 +58,14 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id);
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->contact = $request->contact;
+        $student->update();
+        return redirect('/');
     }
 
     /**
