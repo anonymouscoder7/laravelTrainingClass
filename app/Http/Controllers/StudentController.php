@@ -13,7 +13,6 @@ class StudentController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -29,13 +28,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $student = new Student();
-        $student->name = $request->name;
-        $student->email = $request->email;
-        $student->contact = $request->contact;
-        $student->save();
-        return back();
+        if (auth()->user()) {
+            // dd($request->all());
+            $student = new Student();
+            $student->name = $request->name;
+            $student->email = $request->email;
+            $student->contact = $request->contact;
+            $student->save();
+            return back();
+        }else{
+            return redirect('/login');
+        }
     }
 
     /**
