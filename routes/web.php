@@ -17,28 +17,32 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/',[FrontendController::class,'index']);
-Route::get('/about',[FrontendController::class,'about']);
-Route::get('/contact',[FrontendController::class,'contact']);
+Route::get('/', [FrontendController::class, 'index']);
+// Route::get('/about', [FrontendController::class, 'about']);
+// Route::get('/contact', [FrontendController::class, 'contact']);
 
 
-Route::get('/about/{data}',[FrontendController::class,'aboutDetails']);
+Route::get('/about/{data}', [FrontendController::class, 'aboutDetails']);
 
-Route::get('/delete/{id}',[StudentController::class,'destroy']);
-Route::get('/edit/{id}',[StudentController::class,'edit']);
+Route::get('/delete/{id}', [StudentController::class, 'destroy']);
+Route::get('/edit/{id}', [StudentController::class, 'edit']);
 
-Route::post('/update/{id}',[StudentController::class,'update']);
-
-
-
+Route::post('/update/{id}', [StudentController::class, 'update']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/save',[StudentController::class,'store']);
+Route::post('/save', [StudentController::class, 'store']);
 
-// Route::group(['middleware'=>'auth'],function(){
-    
+Route::group(['middleware' => 'admin'], function () {
 
-// });
+    // admin route
+    Route::get('/about', [FrontendController::class, 'about']);
+});
+
+Route::group(['middleware' => 'user'], function () {
+
+    // user route
+    Route::get('/contact', [FrontendController::class, 'contact']);
+});

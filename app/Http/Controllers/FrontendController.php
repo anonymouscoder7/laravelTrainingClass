@@ -12,10 +12,12 @@ class FrontendController extends Controller
 {
     function index()
     {
-        $students = Student::orderBy('id', 'desc')->get();
+        // $students = Student::orderBy('id', 'desc')->get();
         // dd($students);
 
-        return view('welcome', compact('students'));
+        // return view('welcome', compact('students'));
+
+        return view('index');
     }
 
 
